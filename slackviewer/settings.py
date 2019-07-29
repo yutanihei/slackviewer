@@ -22,17 +22,29 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'ftlmr(*-=t*n1(x#1e36o5$g%96t#*7b1q74-xz#)2qi-ry!#i'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+# Database
+# https://docs.djangoproject.com/en/2.0/ref/settings/#databases
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
 
 # Parse database configuration from $DATABASE_URL
 import dj_database_url
-DATABASES = {'default': dj_database_url.config(default=os.environ.get('DATABASE_URL'))}
+db_from_env = dj_database_url.config()
+DATABASES['default'].update(db_from_env)
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 ALLOWED_HOSTS = ['*']
+
+
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = False
 
 
 # Application definition
@@ -77,9 +89,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'slackviewer.wsgi.application'
 
-
-# Database
-# https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
 
 
