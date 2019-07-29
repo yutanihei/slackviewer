@@ -25,16 +25,15 @@ SECRET_KEY = 'ftlmr(*-=t*n1(x#1e36o5$g%96t#*7b1q74-xz#)2qi-ry!#i'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-try:
-    from .local_settings import *
-except ImportError:
-    pass
+# Parse database configuration from $DATABASE_URL
+import dj_database_url
+db_from_env = dj_database_url.config()
+DATABASES['default'].update(db_from_env)
 
-if not DEBUG:
-    import django_heroku
-    django_heroku.settings(locals())
+# Honor the 'X-Forwarded-Proto' header for request.is_secure()
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
