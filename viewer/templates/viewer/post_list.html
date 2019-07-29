@@ -1,0 +1,14 @@
+<!-- 結局これいらんくね、home.htmlで十分？ -->
+
+{% extends 'viewer/base.html' %}
+
+{% block content %}
+    {% for post in posts %}
+        <div>
+            <p>user: {{ post.user.real_name }}</p>
+            <h3>{{ post.text }}</h3>
+            <!-- <p>published: {{ post.ts }}</p> -->
+            <!-- <p>channel: {{ post.channel.name }}</p> -->
+        </div>
+    {% endfor %}
+{% endblock %}
