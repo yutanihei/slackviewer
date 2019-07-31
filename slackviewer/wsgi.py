@@ -7,6 +7,8 @@ For more information on this file, see
 https://docs.djangoproject.com/en/2.0/howto/deployment/wsgi/
 """
 
+# 一旦、WhiteNoiseを3.3.1に戻した
+
 import os
 
 from dj_static import Cling
